@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AquaSmart</title>
+  <title>AquaSmart - Panel Contratista</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -68,6 +68,11 @@
       padding: 20px;
       width: 250px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
     }
 
     .card h3 {
@@ -82,11 +87,40 @@
       margin-top: 50px;
     }
 
-    /* Gráfico simulado */
-    #chartContainer {
+    /* Gráficos */
+    #chartContainer, #estadisticas {
       margin: 0 auto;
       width: 80%;
       max-width: 600px;
+    }
+
+    /* Secciones nuevas */
+    #beneficios, #caracteristicas, #casos, #ofrece, #admin {
+      background: #e6f7ff;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    /* Formulario de login */
+    #loginForm input, #loginForm button {
+      font-size: 1em;
+      border-radius: 5px;
+    }
+
+    #loginForm button:hover {
+      background-color: #0077cc;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      max-width: 600px;
+      margin: auto;
+      text-align: left;
+    }
+
+    ul li {
+      padding: 5px 0;
     }
   </style>
 </head>
@@ -94,11 +128,14 @@
 
   <!-- Header -->
   <header>
-    <h1>AquaSmart</h1>
+    <h1>AquaSmart - Panel Contratista</h1>
     <nav>
       <a href="#inicio">Inicio</a>
       <a href="#funciona">Cómo Funciona</a>
+      <a href="#ofrece">Qué Ofrece</a>
       <a href="#datos">Datos</a>
+      <a href="#estadisticas">Estadísticas</a>
+      <a href="#admin">Acceso Admin</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
@@ -106,32 +143,71 @@
   <!-- Sección de inicio -->
   <section id="inicio">
     <h2>Bienvenido a AquaSmart</h2>
-    <p>Monitoreo inteligente del agua para tu hogar, jardín o empresa. Visualiza y controla el uso del agua de forma sencilla y eficiente.</p>
+    <p>Monitoreo inteligente del agua para hogares, jardines y empresas. Desde este panel, los contratistas pueden gestionar incidencias reportadas por los usuarios y optimizar el uso del recurso.</p>
   </section>
 
   <!-- Sección cómo funciona -->
   <section id="funciona">
-    <h2>Cómo Funciona</h2>
+    <h2>Cómo Funciona AquaSmart</h2>
     <div class="cards">
       <div class="card">
         <h3>Sensor de Agua</h3>
-        <p>Mide la cantidad y calidad del agua en tiempo real.</p>
+        <p>Mide cantidad, calidad y posibles fallas en tiempo real, enviando los datos al panel del contratista.</p>
       </div>
       <div class="card">
-        <h3>App Móvil</h3>
-        <p>Recibe notificaciones y controla el consumo desde tu celular.</p>
+        <h3>App Móvil del Usuario</h3>
+        <p>Los ciudadanos reportan incidencias o fallas directamente desde la app, generando alertas automáticas.</p>
       </div>
       <div class="card">
-        <h3>Panel Web</h3>
-        <p>Visualiza gráficas y reportes históricos de manera intuitiva.</p>
+        <h3>Panel Web del Contratista</h3>
+        <p>Visualiza gráficas, reportes históricos y reportes de los usuarios para tomar decisiones rápidas.</p>
       </div>
     </div>
   </section>
 
-  <!-- Sección de datos (gráfico simulado) -->
+  <!-- Sección qué ofrece -->
+  <section id="ofrece">
+    <h2>Qué Ofrece AquaSmart para Contratistas</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Monitoreo en Tiempo Real</h3>
+        <p>Visualiza el nivel y calidad del agua en todos los puntos conectados desde un solo panel.</p>
+      </div>
+      <div class="card">
+        <h3>Reportes de Ciudadanos</h3>
+        <p>Recibe notificaciones y detalles de fallas reportadas por los usuarios desde la app móvil.</p>
+      </div>
+      <div class="card">
+        <h3>Control Administrativo</h3>
+        <p>Gestiona los usuarios, revisa historial de incidencias y optimiza la distribución de recursos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de datos (gráfico consumo diario) -->
   <section id="datos">
     <h2>Datos en Tiempo Real</h2>
     <canvas id="chart" width="400" height="200"></canvas>
+  </section>
+
+  <!-- Sección estadísticas de fallas -->
+  <section id="estadisticas">
+    <h2>Estadísticas de Fallas Reportadas</h2>
+    <canvas id="reportesChart" width="400" height="200"></canvas>
+  </section>
+
+  <!-- Sección acceso admin -->
+  <section id="admin">
+    <h2>Acceso para Contratistas</h2>
+    <p>Inicia sesión para acceder a tu panel administrativo:</p>
+    <form id="loginForm" style="max-width: 300px; margin: auto; text-align: left;">
+      <label for="username">Usuario:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p id="loginMessage" style="text-align:center; color:red; margin-top:10px;"></p>
   </section>
 
   <!-- Sección contacto -->
@@ -145,11 +221,12 @@
     &copy; 2026 AquaSmart. Todos los derechos reservados.
   </footer>
 
-  <!-- JS para gráfico simulado -->
+  <!-- JS para gráficos y login -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    // Gráfico de nivel de agua
     const ctx = document.getElementById('chart').getContext('2d');
-    const chart = new Chart(ctx, {
+    new Chart(ctx, {
       type: 'line',
       data: {
         labels: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
@@ -161,12 +238,45 @@
           fill: true,
           tension: 0.3
         }]
-      }, 
+      },
       options: {
         responsive: true,
-        scales: {
-          y: { beginAtZero: true }
-        }
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    // Gráfico de incidencias
+    const ctxReportes = document.getElementById('reportesChart').getContext('2d');
+    new Chart(ctxReportes, {
+      type: 'bar',
+      data: {
+        labels: ['Fugas', 'Contaminación', 'Baja Presión', 'Otros'],
+        datasets: [{
+          label: 'Incidencias reportadas',
+          data: [5, 3, 8, 2],
+          backgroundColor: ['#ff6384','#36a2eb','#ffce56','#00aaff']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    // Login simulado
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('loginMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = form.username.value;
+      const password = form.password.value;
+      if(username === 'admin' && password === '1234') {
+        message.style.color = 'green';
+        message.textContent = '¡Inicio de sesión exitoso! Accediendo al panel...';
+      } else {
+        message.style.color = 'red';
+        message.textContent = 'Usuario o contraseña incorrectos.';
       }
     });
   </script>
