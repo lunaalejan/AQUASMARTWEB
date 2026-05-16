@@ -4,370 +4,506 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AquaSmart</title>
-
+<link rel="icon" href="img/AquaSmart.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
+/* ====== VARIABLES ====== */
+:root {
+  --primary: #1f3c88;
+  --dark: #162447;
+  --accent: #4dabf7;
+}
+
 /* ====== BODY ====== */
-body{
+body {
   font-family: 'Inter', sans-serif;
-  margin:0;
+  margin: 0;
   background: linear-gradient(135deg, #eef2f7, #d9e4f5);
-  color:#333;
+  color: #333;
 }
 
 /* ====== HEADER ====== */
-header{
-  background:#162447;
-  color:white;
-  padding:20px;
-  text-align:center;
+header {
+  background: var(--dark);
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-nav{
-  margin-top:10px;
+nav {
+  margin-top: 10px;
 }
 
-nav a{
-  color:white;
-  margin:0 10px;
-  cursor:pointer;
-  font-size:14px;
+nav a {
+  color: white;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+  text-decoration: none;
 }
 
-nav a:hover{
-  text-decoration:underline;
+/* MEJORA 2: Estado activo en navegación */
+nav a.active,
+nav a:hover {
+  border-bottom: 2px solid var(--accent);
 }
 
 /* ====== SECCIONES ====== */
-section{
-  padding:50px 12%;
-  background:white;
-  margin:30px auto;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
-  max-width:1200px;
-  transition:0.3s;
+section {
+  padding: 50px 12%;
+  background: white;
+  margin: 30px auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  max-width: 1200px;
+  transition: transform 0.3s;
 }
 
-section:hover{
+section:hover {
   transform: translateY(-3px);
 }
 
-h2{
-  text-align:center;
-  margin-bottom:40px;
-  color:#1f3c88;
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--primary);
 }
 
 /* ====== BLOQUES ====== */
-.intro-block{
-  display:flex;
-  align-items:center;
-  gap:40px;
-  margin-bottom:60px;
+.intro-block {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 60px;
 }
 
-.intro-block:nth-child(even){
-  flex-direction:row-reverse;
+.intro-block:nth-child(even) {
+  flex-direction: row-reverse;
 }
 
-.intro-text{
-  flex:1;
+.intro-text {
+  flex: 1;
 }
 
-.intro-text h3{
-  color:#1f3c88;
+.intro-text h3 {
+  color: var(--primary);
 }
 
-.intro-text p, .intro-text ul{
-  text-align:justify;
-  line-height:1.7;
-  max-width:480px;
+.intro-text p,
+.intro-text ul {
+  text-align: justify;
+  line-height: 1.7;
+  max-width: 480px;
 }
 
-.intro-img{
-  flex:1;
-  text-align:center;
+.intro-img {
+  flex: 1;
+  text-align: center;
 }
 
-.intro-img img{
-  width:100%;
-  max-width:400px;
-  border-radius:8px;
-}
-
-/* ====== CARDS ====== */
-.cards{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-.card{
-  background:white;
-  padding:20px;
-  width:250px;
-  border-radius:8px;
-  border:1px solid #ddd;
-}
-
-/* ====== ADMIN ====== */
-#authContainer{
-  max-width:350px;
-  margin:auto;
-  padding:20px;
-  background:white;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-#authContainer h3{
-  text-align:center;
-  color:#1f3c88;
-}
-
-#authContainer input, #authContainer button{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:6px;
-  border:1px solid #ccc;
-}
-
-#authContainer button{
-  background:#1f3c88;
-  color:white;
-  border:none;
-  cursor:pointer;
-}
-
-#authContainer button:hover{
-  background:#162447;
-}
-
-.link{
-  color:#1f3c88;
-  font-size:13px;
-  cursor:pointer;
-  text-align:center;
-}
-
-.link:hover{
-  text-decoration:underline;
-}
-
-/* ====== FOOTER ====== */
-footer{
-  background:#162447;
-  color:white;
-  text-align:center;
-  padding:15px;
-  margin-top:30px;
-}
-
-.intro-img img{
+.intro-img img {
   width: 100%;
-  max-width: 350px;   /* mismo ancho para todas */
-  height: 300px;      /* mismo alto */
-  object-fit: cover;  /* recorta sin deformar */
+  max-width: 350px;
+  height: 300px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
+/* ====== CARDS ====== */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* ====== ADMIN ====== */
+#authContainer {
+  max-width: 350px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#authContainer h3 {
+  text-align: center;
+  color: var(--primary);
+}
+
+/* MEJORA 3: Labels accesibles */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.form-group input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+
+#authContainer button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#authContainer button:hover {
+  background: var(--dark);
+}
+
+/* Panel usuario logueado */
+#loggedPanel {
+  display: none;
+}
+
+#loggedPanel h3 {
+  text-align: center;
+  color: var(--primary);
+}
+
+#loggedPanel button {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#loggedPanel button:hover {
+  background: var(--dark);
+}
+
+#loggedPanel button.secondary {
+  background: #e74c3c;
+}
+
+#loggedPanel button.secondary:hover {
+  background: #c0392b;
+}
+
+#changePassBox {
+  display: none;
+  margin-top: 12px;
+}
+
+.link {
+  color: var(--primary);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  margin: 6px 0;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ====== MENSAJES ====== */
+#authMessage {
+  font-size: 13px;
+  text-align: center;
+  min-height: 18px;
+  margin-top: 8px;
+}
+
+/* ====== FOOTER ====== */
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
 /* ====== RESPONSIVE ====== */
-@media(max-width:768px){
-  .intro-block{
-    flex-direction:column !important;
+@media(max-width: 768px) {
+  .intro-block {
+    flex-direction: column !important;
+  }
+
+  section {
+    padding: 30px 6%;
   }
 }
 
 </style>
 </head>
-<link rel="icon" href="img/AquaSmart.png" type="image/png">
+
 
 <body>
 
 <header>
-<h1>AquaSmart</h1>
-<nav>
-  <a onclick="showSection('inicio')">Inicio</a>
-  <a onclick="showSection('funciona')">Cómo Funciona</a>
-  <a onclick="showSection('datos')">Datos</a>
-  <a onclick="showSection('estadisticas')">Estadísticas</a>
-  <a onclick="showSection('admin')">Admin</a>
-</nav>
+  <h1>AquaSmart</h1>
+  <nav id="mainNav">
+    <a onclick="showSection('inicio')" data-section="inicio" class="active">Inicio</a>
+    <a onclick="showSection('funciona')" data-section="funciona">Cómo Funciona</a>
+    <a onclick="showSection('datos')" data-section="datos">Datos</a>
+    <a onclick="showSection('estadisticas')" data-section="estadisticas">Estadísticas</a>
+    <a onclick="showSection('admin')" data-section="admin">Admin</a>
+  </nav>
 </header>
 
 <!-- ====== INICIO ====== -->
 <section id="inicio">
-<h2>Bienvenido a AquaSmart</h2>
+  <h2>Bienvenido a AquaSmart</h2>
 
-<div class="intro-block">
-<div class="intro-text">
-<h3>Problemática</h3>
-<p>
-En el municipio de Cota se presentan problemáticas relacionadas con el desperdicio de agua,
-la falta de comunicación eficiente y la baja calidad del recurso hídrico. Esta situación
-afecta hogares, instituciones y empresas, generando ineficiencia y riesgos para la comunidad.
-</p>
-</div>
-<div class="intro-img">
-<img src="https://agua.org.mx/wp-content/uploads/2017/07/913407.jpg">
-</div>
-</div>
+  <div class="intro-block">
+    <div class="intro-text">
+      <h3>Problemática</h3>
+      <p>
+        En el municipio de Cota se presentan problemáticas relacionadas con el desperdicio de agua,
+        la falta de comunicación eficiente y la baja calidad del recurso hídrico. Esta situación
+        afecta hogares, instituciones y empresas, generando ineficiencia y riesgos para la comunidad.
+      </p>
+    </div>
+    <div class="intro-img">
+      <img src="https://agua.org.mx/wp-content/uploads/2017/07/913407.jpg" alt="Problemática del agua en Cota">
+    </div>
+  </div>
 
-<div class="intro-block">
-<div class="intro-text">
-<h3>Solución</h3>
-<p>
-AquaSmart propone una solución basada en sensores inteligentes, una aplicación móvil y un
-panel web. Estas herramientas permiten monitorear el consumo de agua en tiempo real,
-detectar fugas y mejorar la comunicación entre usuarios y entidades responsables.
-</p>
-</div>
-<div class="intro-img">
-<img src="img/AquaSmart.png" alt="AquaSmart">
-</div>
-</div>
+  <div class="intro-block">
+    <div class="intro-text">
+      <h3>Solución</h3>
+      <p>
+        AquaSmart propone una solución basada en sensores inteligentes, una aplicación móvil y un
+        panel web. Estas herramientas permiten monitorear el consumo de agua en tiempo real,
+        detectar fugas y mejorar la comunicación entre usuarios y entidades responsables.
+      </p>
+    </div>
+    <div class="intro-img">
+      <img src="img/AquaSmart.png" alt="Logo AquaSmart">
+    </div>
+  </div>
 
-<div class="intro-block">
-<div class="intro-text">
-<h3>Objetivos</h3>
-<ul>
-<li>Reducir el desperdicio de agua.</li>
-<li>Detectar incidencias en tiempo real.</li>
-<li>Optimizar la gestión del recurso hídrico.</li>
-</ul>
-</div>
-<div class="intro-img">
-<img src="https://www.ecolatras.es/archivos/blog/agua.jpg">
-</div>
-</div>
+  <div class="intro-block">
+    <div class="intro-text">
+      <h3>Objetivos</h3>
+      <ul>
+        <li>Reducir el desperdicio de agua.</li>
+        <li>Detectar incidencias en tiempo real.</li>
+        <li>Optimizar la gestión del recurso hídrico.</li>
+      </ul>
+    </div>
+    <div class="intro-img">
+      <img src="https://www.ecolatras.es/archivos/blog/agua.jpg" alt="Objetivos de AquaSmart">
+    </div>
+  </div>
 
-<div class="intro-block">
-<div class="intro-text">
-<h3>Misión</h3>
-<p>
-Brindar soluciones tecnológicas que permitan gestionar eficientemente el agua,
-promoviendo el uso responsable del recurso.
-</p>
-</div>
-<div class="intro-img">
-<img src="https://www.mx.endress.com/__image/a/9191981/k/131da39f3d5fc683deff41e0dbdf4a95626ae1f2/ar/1-1/w/928/t/jpg/b/ffffff/fn/Smart%20water%20network%20management_Netilion%20Water%20Network%20Insights.jpg">
-</div>
-</div>
+  <div class="intro-block">
+    <div class="intro-text">
+      <h3>Misión</h3>
+      <p>
+        Brindar soluciones tecnológicas que permitan gestionar eficientemente el agua,
+        promoviendo el uso responsable del recurso.
+      </p>
+    </div>
+    <div class="intro-img">
+      <img src="https://www.mx.endress.com/__image/a/9191981/k/131da39f3d5fc683deff41e0dbdf4a95626ae1f2/ar/1-1/w/928/t/jpg/b/ffffff/fn/Smart%20water%20network%20management_Netilion%20Water%20Network%20Insights.jpg" alt="Misión AquaSmart">
+    </div>
+  </div>
 
-<div class="intro-block">
-<div class="intro-text">
-<h3>Visión</h3>
-<p>
-Ser una plataforma reconocida por mejorar la gestión del agua y contribuir
-al desarrollo sostenible en comunidades.
-</p>
-</div>
-<div class="intro-img">
-<img src="https://fepropaz.com/wp-content/uploads/2024/01/1-3.jpg">
-</div>
-</div>
-
+  <div class="intro-block">
+    <div class="intro-text">
+      <h3>Visión</h3>
+      <p>
+        Ser una plataforma reconocida por mejorar la gestión del agua y contribuir
+        al desarrollo sostenible en comunidades.
+      </p>
+    </div>
+    <div class="intro-img">
+      <img src="https://fepropaz.com/wp-content/uploads/2024/01/1-3.jpg" alt="Visión AquaSmart">
+    </div>
+  </div>
 </section>
 
+<!-- ====== CÓMO FUNCIONA ====== -->
 <section id="funciona" style="display:none;">
-<h2>Cómo Funciona</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>📡 Sensor</h3>
-<p>
-Se implementan sensores en los tanques de agua que abastecen las diferentes veredas del municipio de Cota.
-Estos dispositivos permiten medir la cantidad y calidad del agua, garantizando un control constante del recurso
-que llega a los hogares.
-</p>
-</div>
-
-<div class="card">
-<h3>📱 Aplicación</h3>
-<p>
-Aplicación dirigida a los ciudadanos, que les permite reportar fallas, evaluar la calidad del agua
-y recibir información sobre cortes o inconvenientes en el servicio.
-<br><br>
-<b style="color:#1f3c88; cursor:pointer;">Haz clic para instalar</b>
-</p>
-</div>
-
-<div class="card">
-<h3>💻 Panel Web</h3>
-<p>
-Es la plataforma utilizada por la empresa prestadora del servicio, donde se centraliza la información
-recibida para analizar reportes, identificar fallas y tomar decisiones oportunas.
-</p>
-</div>
-
-</div>
+  <h2>Cómo Funciona</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>📡 Sensor</h3>
+      <p>
+        Se implementan sensores en los tanques de agua que abastecen las diferentes veredas del municipio de Cota.
+        Estos dispositivos permiten medir la cantidad y calidad del agua, garantizando un control constante del recurso
+        que llega a los hogares.
+      </p>
+    </div>
+    <div class="card">
+      <h3>📱 Aplicación</h3>
+      <p>
+        Aplicación dirigida a los ciudadanos, que les permite reportar fallas, evaluar la calidad del agua
+        y recibir información sobre cortes o inconvenientes en el servicio.
+        <br><br>
+        <b style="color:var(--primary); cursor:pointer;">Haz clic para instalar</b>
+      </p>
+    </div>
+    <div class="card">
+      <h3>💻 Panel Web</h3>
+      <p>
+        Es la plataforma utilizada por la empresa prestadora del servicio, donde se centraliza la información
+        recibida para analizar reportes, identificar fallas y tomar decisiones oportunas.
+      </p>
+    </div>
+  </div>
 </section>
 
 <!-- ====== DATOS ====== -->
 <section id="datos" style="display:none;">
-<h2>Datos en Tiempo Real</h2>
-<canvas id="chart"></canvas>
+  <h2>Datos en Tiempo Real</h2>
+  <canvas id="chart"></canvas>
 </section>
 
-<!-- ====== ESTADISTICAS ====== -->
+<!-- ====== ESTADÍSTICAS ====== -->
 <section id="estadisticas" style="display:none;">
-<h2>Estadísticas</h2>
-<canvas id="reportesChart"></canvas>
+  <h2>Estadísticas</h2>
+  <canvas id="reportesChart"></canvas>
 </section>
 
 <!-- ====== ADMIN ====== -->
 <section id="admin" style="display:none;">
-<h2>Panel de Acceso</h2>
+  <h2>Panel de Acceso</h2>
 
-<div id="authContainer">
+  <div id="authContainer">
 
-<form id="loginForm">
-<h3>Iniciar Sesión</h3>
-<input type="text" id="loginUser" placeholder="Usuario" required>
-<input type="password" id="loginPass" placeholder="Contraseña" required>
-<button>Ingresar</button>
+    <!-- LOGIN -->
+    <div id="loginForm">
+      <h3>Iniciar Sesión</h3>
 
-<p class="link" onclick="showAuth('register')">¿No tienes cuenta? Regístrate</p>
-<p class="link" onclick="showAuth('forgot')">¿Olvidaste tu contraseña?</p>
-</form>
+      <!-- MEJORA 3: Labels accesibles -->
+      <div class="form-group">
+        <label for="loginUser">Correo electrónico</label>
+        <input type="email" id="loginUser" placeholder="tu@correo.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="loginPass">Contraseña</label>
+        <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+      </div>
 
-<form id="registerForm" style="display:none;">
-<h3>Registrarse</h3>
-<input type="text" id="regUser" placeholder="Usuario" required>
-<input type="password" id="regPass" placeholder="Contraseña" required>
-<button>Crear cuenta</button>
+      <button onclick="doLogin()">Ingresar</button>
+      <p class="link" onclick="showAuth('register')">¿No tienes cuenta? Regístrate</p>
+      <p class="link" onclick="showAuth('forgot')">¿Olvidaste tu contraseña?</p>
+    </div>
 
-<p class="link" onclick="showAuth('login')">Ya tengo cuenta</p>
-</form>
+    <!-- REGISTRO -->
+    <div id="registerForm" style="display:none;">
+      <h3>Registrarse</h3>
 
-<form id="forgotForm" style="display:none;">
-<h3>Recuperar Contraseña</h3>
-<input type="email" id="forgotEmail" placeholder="Correo electrónico" required>
-<button>Enviar recuperación</button>
+      <div class="form-group">
+        <label for="regNombre">Nombre</label>
+        <input type="text" id="regNombre" placeholder="Tu nombre" autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label for="regApellido">Apellido</label>
+        <input type="text" id="regApellido" placeholder="Tu apellido" autocomplete="family-name">
+      </div>
+      <div class="form-group">
+        <label for="regEmail">Correo electrónico</label>
+        <input type="email" id="regEmail" placeholder="tu@correo.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="regPass">Contraseña</label>
+        <input type="password" id="regPass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label for="regPass2">Confirmar contraseña</label>
+        <input type="password" id="regPass2" placeholder="Repite tu contraseña" autocomplete="new-password">
+      </div>
 
-<p class="link" onclick="showAuth('login')">Volver al login</p>
-</form>
+      <button onclick="doRegister()">Crear cuenta</button>
+      <p class="link" onclick="showAuth('login')">Ya tengo cuenta</p>
+    </div>
 
-<p id="authMessage"></p>
+    <!-- RECUPERAR CONTRASEÑA -->
+    <div id="forgotForm" style="display:none;">
+      <h3>Recuperar Contraseña</h3>
 
-</div>
+      <div class="form-group">
+        <label for="forgotEmail">Correo electrónico</label>
+        <input type="email" id="forgotEmail" placeholder="tu@correo.com" autocomplete="email">
+      </div>
+
+      <button onclick="doForgot()">Enviar recuperación</button>
+      <p class="link" onclick="showAuth('login')">Volver al login</p>
+    </div>
+
+    <!-- PANEL USUARIO LOGUEADO -->
+    <!-- MEJORA 5: Vista separada en lugar de innerHTML -->
+    <div id="loggedPanel">
+      <h3>Bienvenido</h3>
+      <p id="loggedName" style="text-align:center; color:#555;"></p>
+
+      <button onclick="showChangePassword()">Cambiar contraseña</button>
+      <button class="secondary" onclick="doLogout()">Cerrar sesión</button>
+
+      <div id="changePassBox">
+        <div class="form-group" style="margin-top:12px;">
+          <label for="newPass">Nueva contraseña</label>
+          <input type="password" id="newPass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        </div>
+        <button onclick="doChangePassword()">Guardar nueva contraseña</button>
+      </div>
+    </div>
+
+    <p id="authMessage" role="alert" aria-live="polite"></p>
+
+  </div>
 </section>
 
 <footer>© 2026 AquaSmart</footer>
 
+<!-- ====== FIREBASE SDK ====== -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 
 <script>
 
-// ===== FIREBASE (SOLO UNA CONFIG) =====
+
 const firebaseConfig = {
   apiKey: "AIzaSyBrbdgkH_oVrYsDzOTOPoyLU5SQ7Tz5yzk",
   authDomain: "aquasmart-f39f5.firebaseapp.com",
@@ -380,209 +516,269 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+let chartInstance = null;
+let reportesChartInstance = null;
+let chartInterval = null;
+let reportesInterval = null;
+let chartInitialized = false;
+let reportesInitialized = false;
 
-// ===== NAVEGACIÓN =====
-function showSection(id){
-  document.querySelectorAll('section').forEach(s=>s.style.display='none');
-  document.getElementById(id).style.display='block';
+function initDatosChart() {
+  if (chartInitialized) return;
+  chartInitialized = true;
+
+  chartInstance = new Chart(document.getElementById('chart'), {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Consumo de agua (L)',
+        data: [],
+        borderColor: '#4dabf7',
+        backgroundColor: 'rgba(77,171,247,0.2)',
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  chartInterval = setInterval(() => {
+    const time = new Date().toLocaleTimeString();
+    const value = Math.floor(Math.random() * 50) + 30;
+    chartInstance.data.labels.push(time);
+    chartInstance.data.datasets[0].data.push(value);
+    if (chartInstance.data.labels.length > 8) {
+      chartInstance.data.labels.shift();
+      chartInstance.data.datasets[0].data.shift();
+    }
+    chartInstance.update();
+  }, 2000);
+}
+
+function initReportesChart() {
+  if (reportesInitialized) return;
+  reportesInitialized = true;
+
+  reportesChartInstance = new Chart(document.getElementById('reportesChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Fugas', 'Presión', 'Calidad'],
+      datasets: [{
+        label: 'Cantidad de reportes',
+        data: [5, 8, 3],
+        backgroundColor: ['#ff6b6b', '#4dabf7', '#51cf66'],
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  reportesInterval = setInterval(() => {
+    reportesChartInstance.data.datasets[0].data =
+      reportesChartInstance.data.datasets[0].data.map(v => v + Math.floor(Math.random() * 2));
+    reportesChartInstance.update();
+  }, 4000);
+}
+
+function stopChartIntervals() {
+  if (chartInterval) { clearInterval(chartInterval); chartInterval = null; }
+  if (reportesInterval) { clearInterval(reportesInterval); reportesInterval = null; }
 }
 
 
-// ===== CAMBIO ENTRE FORMULARIOS =====
-function showAuth(type){
-  document.getElementById("loginForm").style.display = "none";
-  document.getElementById("registerForm").style.display = "none";
-  document.getElementById("forgotForm").style.display = "none";
-  document.getElementById(type+"Form").style.display = "block";
-}
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+
+  document.querySelectorAll('#mainNav a').forEach(link => {
+    link.classList.toggle('active', link.dataset.section === id);
+  });
 
 
-// ===== REGISTRO (FIREBASE REAL) =====
-document.getElementById("registerForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  let email = regUser.value;
-  let password = regPass.value;
-
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      showMessage("Cuenta creada correctamente", "green");
-      showAuth("login");
-    })
-    .catch(error => {
-      showMessage(error.message, "red");
-    });
-});
-
-
-// ===== LOGIN (FIREBASE REAL) =====
-document.getElementById("loginForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  let email = loginUser.value;
-  let password = loginPass.value;
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-
-      let user = userCredential.user;
-
-      showMessage("Bienvenido " + user.email, "green");
-
-      setTimeout(()=>{
-        document.getElementById("authContainer").innerHTML = `
-          <h3>Bienvenido</h3>
-          <p>✔ Sesión iniciada como <b>${user.email}</b></p>
-
-          <button onclick="showChangePassword()">Cambiar contraseña</button>
-          <button onclick="logout()">Cerrar sesión</button>
-
-          <div id="changePassBox" style="display:none; margin-top:15px;">
-            <input type="password" id="newPass" placeholder="Nueva contraseña">
-            <button onclick="changePassword()">Guardar nueva contraseña</button>
-          </div>
-        `;
-      },1000);
-
-    })
-    .catch(error => {
-      showMessage(error.message, "red");
-    });
-});
-
-
-// ===== RECUPERAR CONTRASEÑA =====
-document.getElementById("forgotForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  let email = forgotEmail.value;
-
-  auth.sendPasswordResetEmail(email)
-    .then(() => {
-      showMessage("Correo de recuperación enviado", "blue");
-    })
-    .catch(error => {
-      showMessage(error.message, "red");
-    });
-});
-
-
-// ===== CAMBIAR CONTRASEÑA =====
-function changePassword(){
-  let newPass = document.getElementById("newPass").value;
-
-  let user = auth.currentUser;
-
-  if(user){
-    user.updatePassword(newPass)
-      .then(() => {
-        alert("Contraseña actualizada correctamente");
-      })
-      .catch(error => {
-        alert(error.message);
-      });
+  if (id === 'datos') {
+    initDatosChart();
+    if (reportesInterval) { clearInterval(reportesInterval); reportesInterval = null; }
+  } else if (id === 'estadisticas') {
+    initReportesChart();
+    if (chartInterval) { clearInterval(chartInterval); chartInterval = null; }
+  } else {
+    stopChartIntervals();
   }
 }
 
+//==== REGISTRO ====
+function showAuth(type) {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('registerForm').style.display = 'none';
+  document.getElementById('forgotForm').style.display = 'none';
+  document.getElementById('loggedPanel').style.display = 'none';
+  clearMessage();
 
-// ===== LOGOUT =====
-function logout(){
-  auth.signOut().then(()=>{
-    location.reload();
+  if (type === 'loggedPanel') {
+    document.getElementById('loggedPanel').style.display = 'block';
+  } else {
+    document.getElementById(type + 'Form').style.display = 'block';
+  }
+}
+
+function showLoggedPanel(user) {
+  showAuth('loggedPanel');
+  document.getElementById('loggedName').textContent =
+    '✔ Sesión iniciada como ' + (user.displayName || user.email);
+}
+
+function showChangePassword() {
+  const box = document.getElementById('changePassBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+
+//==== REGISTRO ====
+async function doRegister() {
+  const nombre  = document.getElementById('regNombre').value.trim();
+  const apellido = document.getElementById('regApellido').value.trim();
+  const email   = document.getElementById('regEmail').value.trim();
+  const pass    = document.getElementById('regPass').value;
+  const pass2   = document.getElementById('regPass2').value;
+
+  if (!nombre || !apellido || !email || !pass || !pass2) {
+    return showMessage('Completa todos los campos', 'red');
+  }
+  if (pass !== pass2) {
+    return showMessage('Las contraseñas no coinciden', 'red');
+  }
+  if (pass.length < 6) {
+    return showMessage('La contraseña debe tener mínimo 6 caracteres', 'red');
+  }
+
+  try {
+    const userCredential = await auth.createUserWithEmailAndPassword(email, pass);
+    await userCredential.user.updateProfile({ displayName: nombre + ' ' + apellido });
+
+    showMessage('Cuenta creada correctamente', 'green');
+    document.getElementById('regNombre').value = '';
+    document.getElementById('regApellido').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regPass').value = '';
+    document.getElementById('regPass2').value = '';
+
+    setTimeout(() => showAuth('login'), 1200);
+  } catch (error) {
+    const mensajes = {
+      'auth/email-already-in-use': 'Este correo ya está registrado',
+      'auth/invalid-email': 'Correo inválido',
+      'auth/weak-password': 'Contraseña muy débil'
+    };
+    showMessage(mensajes[error.code] || 'Error al registrar usuario', 'red');
+  }
+}
+
+//==== LOGIN ====
+function doLogin() {
+  const email    = document.getElementById('loginUser').value.trim();
+  const password = document.getElementById('loginPass').value;
+
+  if (!email || !password) {
+    return showMessage('Ingresa correo y contraseña', 'red');
+  }
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(userCredential => {
+        showMessage('Bienvenido ' + (userCredential.user.displayName || userCredential.user.email), 'green');
+         setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+          })
+    .catch(error => {
+      const mensajes = {
+        'auth/user-not-found': 'El correo no está registrado',
+        'auth/wrong-password': 'Contraseña incorrecta',
+        'auth/invalid-email': 'Correo inválido',
+        'auth/invalid-credential': 'Correo o contraseña incorrectos'
+      };
+      showMessage(mensajes[error.code] || 'Error al iniciar sesión', 'red');
+    });
+}
+
+//==== RECUPERAR CONTRASEÑA ====
+function doForgot() {
+  const email = document.getElementById('forgotEmail').value.trim();
+
+  if (!email) {
+    return showMessage('Ingresa tu correo', 'red');
+  }
+
+  auth.sendPasswordResetEmail(email)
+    .then(() => showMessage('Correo de recuperación enviado', 'blue'))
+    .catch(error => showMessage(error.message, 'red'));
+}
+
+//==== CAMBIAR CONTRASEÑA ====
+function doChangePassword() {
+  const newPass = document.getElementById('newPass').value;
+
+  if (newPass.length < 6) {
+    return showMessage('La contraseña debe tener mínimo 6 caracteres', 'red');
+  }
+
+  const user = auth.currentUser;
+  if (!user) return showMessage('No hay sesión activa', 'red');
+
+  user.updatePassword(newPass)
+    .then(() => {
+      showMessage('Contraseña actualizada correctamente', 'green');
+      document.getElementById('newPass').value = '';
+      document.getElementById('changePassBox').style.display = 'none';
+    })
+    .catch(() => showMessage('Error: vuelve a iniciar sesión e inténtalo de nuevo', 'red'));
+}
+
+//==== LOGOUT ====
+function doLogout() {
+  auth.signOut().then(() => {
+    showAuth('login');
+    showMessage('Sesión cerrada', 'blue');
   });
 }
 
 
-// ===== MENSAJES =====
-function showMessage(text, color){
-  let msg = document.getElementById("authMessage");
-  msg.innerText = text;
+//==== MENSAJES ====
+function showMessage(text, color) {
+  const msg = document.getElementById('authMessage');
+  msg.textContent = text;
   msg.style.color = color;
 }
 
-// ===== INICIO =====
+function clearMessage() {
+  const msg = document.getElementById('authMessage');
+  msg.textContent = '';
+}
+
+//==== RESTAURAR SESIÓN AL RECARGAR ====
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    const admin = document.getElementById('admin');
+    if (admin && admin.style.display !== 'none') {
+      showLoggedPanel(user);
+    }
+  }
+});
+
+//==== INICIO ====
+
 showSection('inicio');
 
-// // ===== GRÁFICA TIEMPO REAL =====
-let chart = new Chart(document.getElementById('chart'),{
-  type:'line',
-  data:{
-    labels:[],
-    datasets:[{
-      label:"Consumo de agua",
-      data:[],
-      borderColor:'#4dabf7',
-      backgroundColor:'rgba(77,171,247,0.2)',
-      tension:0.3,
-      fill:true
-    }]
-  },
-  options:{
-    responsive:true,
-    scales:{
-      y:{
-        beginAtZero:true
-      }
-    }
-  }
+//==== ENTER en inputs de login ====
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
 });
 
-// Simulación datos
-setInterval(()=>{
-  let time = new Date().toLocaleTimeString();
-  let value = Math.floor(Math.random()*50)+30;
-
-  chart.data.labels.push(time);
-  chart.data.datasets[0].data.push(value);
-
-  if(chart.data.labels.length > 8){
-    chart.data.labels.shift();
-    chart.data.datasets[0].data.shift();
-  }
-
-  chart.update();
-},2000);
-
-
-// ===== GRÁFICA DE REPORTES =====
-let reportesChart = new Chart(document.getElementById('reportesChart'),{
-  type:'bar',
-  data:{
-    labels:['Fugas','Presión','Calidad'],
-    datasets:[{
-      label:"Cantidad de reportes", // 🔥 arregla el "undefined"
-      data:[5,8,3],
-      backgroundColor:[
-        '#ff6b6b',
-        '#4dabf7',
-        '#51cf66'
-      ],
-      borderRadius:8
-    }]
-  },
-  options:{
-    responsive:true,
-    plugins:{
-      legend:{
-        display:true
-      }
-    },
-    scales:{
-      y:{
-        beginAtZero:true
-      }
-    }
-  }
-});
-
-
-// ===== ACTUALIZACIÓN SIN NEGATIVOS =====
-setInterval(()=>{
-  reportesChart.data.datasets[0].data =
-    reportesChart.data.datasets[0].data.map(v => v + Math.floor(Math.random()*2));
-
-  reportesChart.update();
-},4000);
 </script>
 </body>
 </html>
